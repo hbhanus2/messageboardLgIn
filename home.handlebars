@@ -1,0 +1,32 @@
+<h1>Welcome!!!</h1>
+
+{{#if username}}
+  <!-- Show messages only for logged-in users -->
+  <div id="messages-container">
+    {{#if messages.length}}
+      {{#each messages}}
+        <div class="message" id="message-{{this.id}}">
+          <strong>{{this.username}}:</strong> {{this.content}}
+          <em>({{this.timestamp}})</em>
+        </div>
+      {{/each}}
+    {{else}}
+      <p>No messages yet. Be the first to post one!</p>
+    {{/if}}
+  </div>
+
+  <!-- Form for posting messages -->
+  <h3>Post a Message</h3>
+  <form action="/message" method="POST">
+    <textarea name="message" required></textarea>
+    <button type="submit">Post Message</button>
+  </form>
+  <p><a href="/logout"><button>Logout</button></a></p>
+
+{{else}}
+  <!-- If not logged in, show login/register options -->
+  <p>
+    <a href="/register"><button>Register</button></a>
+    <a href="/login"><button>Login</button></a>
+  </p>
+{{/if}}
